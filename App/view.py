@@ -44,10 +44,56 @@ operación seleccionada.
 # ___________________________________________________
 
 
+s = "taxi-trips-wrvz-psew-subset-small.csv"
+m = "taxi-trips-wrvz-psew-subset-medium.csv"
+l = "taxi-trips-wrvz-psew-subset-large.csv"
+
 # ___________________________________________________
 #  Menu principal
 # ___________________________________________________
 
+def printMenu():
+    print("\n")
+    print("Bienvenido")
+    print("1- Inicializar Analizador")
+    print("2- Cargar información de Taxis")
+    print("3- Reporte general de la compañia")
+    print("4- Obtener el mejor horario para Chicago")
+    print("0- Salir")
+
+
+
+def optionTwo():
+    print("¿Que archivo quiere cargar?")
+    file = input("Escriba 1 para el pequeño.\nEscriba 2 para el mediano.\nEscriba 3 para el grande.\n")
+    print("\nCargando información de taxis en Chicago")
+    if file[0] == "1":
+        controller.loadFile(cont,s)
+        print("Archivo cargado")
+    elif file[0] == "2":
+        controller.loadFile(cont,m)
+        print("Archivo cargado")
+    elif file[0] == "3":
+        controller.loadFile(cont,l)
+        print("Archivo cargado")
+    else:
+        print("Ingrese un valor válido")
+
+
 """
 Menu principal
 """
+while True:
+    printMenu()
+    inputs = input('Seleccione una opción para continuar \n')
+    if int(inputs[0]) == 1:
+        print('\nInicializando...')
+        cont = controller.init()
+    elif int(inputs[0]) == 2:
+        optionTwo()
+    elif int(inputs[0]) == 3:
+        option_three()
+    elif int(inputs[0]) == 4:
+        option_four()
+    else:
+        sys.exit(0)

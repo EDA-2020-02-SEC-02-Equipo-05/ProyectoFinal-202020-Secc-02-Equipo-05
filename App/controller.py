@@ -40,12 +40,31 @@ recae sobre el controlador.
 #  Inicializacion del catalogo
 # ___________________________________________________
 
+def init():
+    analyzer = model.newAnalyzer()
+    return analyzer
 
 # ___________________________________________________
 #  Funciones para la carga de datos y almacenamiento
 #  de datos en los modelos
 # ___________________________________________________
 
+def loadFiles(analyzer):
+    for filename in os.listdir(cf.data_dir):
+        if filename.endswith('.csv'):
+            print('Cargando archivo: ' + filename)
+            loadFile(analyzer, filename)
+    return analyzer
+    
+def loadFile(analyzer, infofile):
+ 
+    infofile = cf.data_dir + infofile
+    input_file = csv.DictReader(open(infofile, encoding= "utf-8"),
+                                delimiter = ",")
+    for line in input_file:
+        model.addLine(analyzer, line)
+
+    return analyzer
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
