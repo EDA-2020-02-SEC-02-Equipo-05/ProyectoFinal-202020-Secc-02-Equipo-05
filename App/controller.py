@@ -71,6 +71,11 @@ def loadFile(analyzer, infofile):
 
 def all(analyzer, n):
     cont = model.all(analyzer)
-    pq = model.P/Q(analyzer)
+    pq = model.P_Q(analyzer)
     a = model.getTopN(pq, n)
     return( cont, a)
+
+def getMejorH(analyzer, startingArea, endingArea, startingH , endingH):
+    startingH = model.getTimeTT(startingH)
+    endingH = model.getTimeTT(EndTime)
+    return model.getMejorH(analyzer["graph"],startingArea,endingaArea,startingH,endingH)
