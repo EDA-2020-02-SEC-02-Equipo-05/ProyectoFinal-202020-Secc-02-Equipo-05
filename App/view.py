@@ -79,6 +79,23 @@ def optionTwo():
     else:
         print("Ingrese un valor válido")
 
+def optionThree():
+    finale = (controller.all(cont, n))
+    
+     print("El total de taxis es: "+str(r[0]["Total_Taxis"]))
+    print("El total de compañias es: "+str(r[0]["Total_Companys"]))
+    if n<= finale[0]["Total_Companys"]:
+
+        print("El top "+ str(n)+ "compañias por numero de taxis es:")
+        for i in (r[1][0]): 
+            print(str(i)+" " + str(r[1][0][i]["company"])+ "con" + str(r[1][0][i]["key"])+ " axis")
+
+        print("El top "+str(n)+ " compañias por numero de servicios es: ")
+        for i in (r[1][1]): 
+            print(+str(i)+str(r[1][1][i]["company"])+ "con" + str(r[1][1][i]["key"])+ "servicios")
+    else: 
+        print("El numero seleccionado no es valido")
+
 
 """
 Menu principal
@@ -92,7 +109,7 @@ while True:
     elif int(inputs[0]) == 2:
         optionTwo()
     elif int(inputs[0]) == 3:
-        option_three()
+        optionThree()
     elif int(inputs[0]) == 4:
         option_four()
     else:

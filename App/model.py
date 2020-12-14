@@ -83,11 +83,11 @@ def addCompany(analyzer, tripfile):
     Map = analyzer["Company"]
     company = tripfile["company"]
     taxiID = tripfile["taxi_id"]
-    lsttaxis = analyzer["Total_Taxis"]
+    lstTaxis = analyzer["Total_Taxis"]
     if company == None or company == "" or company == " ": 
         company = "Independent Owner"  
-    existcompany = m.contains(Map, company)
-    if existcompany:
+    existC = m.contains(Map, company)
+    if existC:
         consulta = m.get(Map, company)['value']
         consulta["Services"] += 1
         if taxiID not in consulta["Taxis"]:
@@ -98,8 +98,8 @@ def addCompany(analyzer, tripfile):
         DictCompany = newCompany()
         m.put(Map, company, DictCompany)
         m.get(Map, company)['value']["Services"] += 1
-    if taxiID not in lsttaxis: 
-            lsttaxis.append(taxiID)
+    if taxiID not in lstTaxis: 
+            lstTaxis.append(taxiID)
 
 
 
@@ -114,6 +114,41 @@ def addCompany(analyzer, tripfile):
 def newCompany():
     num = {"Taxis": [],"numTaxis":0, "Services": 0}
     return num
+
+def all(analyzer):
+    return {"Total_Taxis": (len(analyzer["Total_Taxis"])), "Total_Companys": analyzer["Total_Companys"] }
+
+def P/Q(analyzer): 
+    
+    TopS =  pq.newMinPQ(cmpfunction= comparefunction)
+    TopT = pq.newMinPQ(cmpfunction= comparefunction)
+    lstcompany = m.keySet(analyzer["Company"])
+    iterator = it.newIterator(lstcompany)
+
+    while it.hasNext(iterator):
+        i = it.next(iterator)
+        consulta = m.get(analyzer["Company"], i)['value']
+        
+        numtaxis = len(consulta["Taxis"])
+        numservices = (consulta["Services"])
+
+        taxisE = {"key": numtaxis, "company": i}
+        servicesE = {"key": numservices, "company": i}
+        
+        pq.insert(TopT, taxisE)
+        pq.insert(TopS, servicesE)
+
+    return {"T_taxis": TopT, "T_services": TopS}
+
+
+    def getTopN(pq, n):
+
+    taxis = {}
+    services = {}
+    for i in range(1, n+1):
+        taxis[i]=pq.delMin(pq["T_taxis"])
+        services[i]=pq.delMin(pq["T_services"])
+    return (taxis, services) 
 
 # ==============================
 # Funciones de Comparacion

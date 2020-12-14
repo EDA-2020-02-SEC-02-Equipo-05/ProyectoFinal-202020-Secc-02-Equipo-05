@@ -68,3 +68,9 @@ def loadFile(analyzer, infofile):
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
+
+def all(analyzer, n):
+    cont = model.all(analyzer)
+    pq = model.P/Q(analyzer)
+    a = model.getTopN(pq, n)
+    return( cont, a)
