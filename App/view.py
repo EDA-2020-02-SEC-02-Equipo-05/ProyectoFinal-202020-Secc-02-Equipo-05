@@ -82,19 +82,35 @@ def optionTwo():
 def optionThree():
     finale = (controller.all(cont, n))
     
-     print("El total de taxis es: "+str(r[0]["Total_Taxis"]))
+    print("El total de taxis es: "+str(r[0]["Total_Taxis"]))
     print("El total de compañias es: "+str(r[0]["Total_Companys"]))
-    if n<= finale[0]["Total_Companys"]:
+    if n <= finale[0]["Total_Companys"]:
 
-        print("El top "+ str(n)+ "compañias por numero de taxis es:")
+        print("El top " + str(n) + "compañias por numero de taxis es:")
         for i in (r[1][0]): 
-            print(str(i)+" " + str(r[1][0][i]["company"])+ "con" + str(r[1][0][i]["key"])+ " axis")
+            print(str(i)+" " + str(r[1][0][i]["company"]) + "con" + str(r[1][0][i]["key"]) + " axis")
 
-        print("El top "+str(n)+ " compañias por numero de servicios es: ")
+        print("El top "+str(n) + " compañias por numero de servicios es: ")
         for i in (r[1][1]): 
-            print(+str(i)+str(r[1][1][i]["company"])+ "con" + str(r[1][1][i]["key"])+ "servicios")
+            print(+str(i) + str(r[1][1][i]["company"]) + "con" + str(r[1][1][i]["key"]) + "servicios")
     else: 
         print("El numero seleccionado no es valido")
+
+def optionFour():
+    startingArea = float(input ("ingrese Area inicio: "))
+    endingArea = float(input ("ingrese Area final "))
+
+    startingH= input("Ingrese hora de incio del rango (HH:MM):  ")
+    endingH = input("Ingrese hora final del rango (HH:MM):  ")
+
+    info = controller.getMejorH(cont,startingArea,endingArea,startingH,endingH)
+
+        if info[1] is not None:
+            print("El mejor horario para tomar el viaje es {}, el cual te tomará aproximadamente {} minutos".format(info[0],int(info[2])//60))
+            print("La mejor ruta para tomar es {}:".format("/".join(info[1])))
+        else:
+            print("Lo sentimos, marcó una opcion que no es valida.")
+
 
 
 """
@@ -111,6 +127,6 @@ while True:
     elif int(inputs[0]) == 3:
         optionThree()
     elif int(inputs[0]) == 4:
-        option_four()
+        optionFour()
     else:
         sys.exit(0)

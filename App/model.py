@@ -118,7 +118,7 @@ def newCompany():
 def all(analyzer):
     return {"Total_Taxis": (len(analyzer["Total_Taxis"])), "Total_Companys": analyzer["Total_Companys"] }
 
-def P/Q(analyzer): 
+def P_Q(analyzer): 
     
     TopS =  pq.newMinPQ(cmpfunction= comparefunction)
     TopT = pq.newMinPQ(cmpfunction= comparefunction)
@@ -141,8 +141,7 @@ def P/Q(analyzer):
     return {"T_taxis": TopT, "T_services": TopS}
 
 
-    def getTopN(pq, n):
-
+def getTopN(pq, n):
     taxis = {}
     services = {}
     for i in range(1, n+1):
@@ -150,7 +149,18 @@ def P/Q(analyzer):
         services[i]=pq.delMin(pq["T_services"])
     return (taxis, services) 
 
-# ==============================
+def getTimeTT(times)
+    TTTdates = datetime.datetime.strptime(times, '%Y-%m-%dT%H:%M:%S.%f')
+    return TTTdates.time()
+
+def getMejorH(analyzer, startingArea, endingArea, startingH , endingH):
+
+    bestS = startingH
+    currentTimes = startingH
+    f = getTime(analyzer, startingArea, endingArea, startingH , endingHs)
+    bestT = f[0]
+    search = f[1]
+ 
 # Funciones de Comparacion
 # ==============================
 
